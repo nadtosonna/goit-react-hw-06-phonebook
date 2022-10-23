@@ -1,27 +1,36 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { nanoid } from "nanoid";
+import { createSlice } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-const contactsSlice = createSlice({
-    name: "contacts",
-    initialState: [],
-    reducers: {
-        addContact: {
-            reducer: (store, {payload}) => {
-                store.push(payload);
-            },
-            prepare: (data) => {
-                return {
-                    payload: {
-                        ...data,
-                        id: nanoid()
-                    }
-                }
-            }
-        },
-        deleteContact: (store, {payload}) => store.filter(({id}) => id !== payload)
-    }
-})
+export const contactsSlice = createSlice({
+  name: 'contacts',
+  initialState: {
+    contacts: [],
+    filter: '',
+  },
+  reducers: {
+    addContact(state, action) {
+      state.contacts.push(action.payload);
+    },
+    deleteContact(state, action) {
+      const index = state.contacts.findIndex(contact => contact.id === action.payload);
+      state.contacts.splice(index, 1);
+    },
+    filterContacts(state, action) {
+      state.filter = action.payload;
+    },
+  },
+});
 
-export const { addContact, deleteContact } = contactsSlice.actions;
+const persistConfig = {
+  key: 'contacts',
+  storage,
+};
 
-export default contactsSlice.reducer;
+export const contactsReducer = persistReducer(
+  persistConfig,
+  contactsSlice.reducer
+);
+
+export const { addContact, deleteContact, filterContacts } =
+  contactsSlice.actions;
