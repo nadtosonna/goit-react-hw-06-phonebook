@@ -23,7 +23,7 @@ export const contactsSlice = createSlice({
     },
     },
     deleteContact(state, action) {
-      state.contacts.filter(({id}) => id !== action.payload);
+      state.contacts = state.contacts.filter(contact => contact.id !== action.payload);
     },
     filterContacts(state, action) {
       state.filter = action.payload;
@@ -32,7 +32,7 @@ export const contactsSlice = createSlice({
 });
 
 const persistConfig = {
-  key: 'root',
+  key: 'contacts',
   storage,
 };
 
