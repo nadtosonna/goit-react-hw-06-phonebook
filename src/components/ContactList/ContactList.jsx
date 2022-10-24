@@ -11,8 +11,11 @@ export const ContactList = () => {
     const contacts = useSelector(getContacts);
     const filter = useSelector(getFilter);
 
+    console.log(contacts);
+
     const deleteContacts = (id) => {
         dispatch(deleteContact(id));
+        console.log(id);
     }
 
     const contactsToDisplay = contacts.filter(contact =>

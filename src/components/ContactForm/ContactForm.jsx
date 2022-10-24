@@ -34,6 +34,7 @@ export const ContactForm = () => {
             Notify.failure('This contact is already existing in the phonebook!', {
                 position: 'center-top',
                 width: '380px',
+                distance: '30px',
             });
             return;
         };
