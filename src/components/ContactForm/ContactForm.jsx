@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { nanoid } from "nanoid";
 import PropTypes from 'prop-types';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +11,6 @@ export const ContactForm = () => {
     const initialState = {
     name: '',
     number: '',
-    id: nanoid(),
 }
     const [state, setState] = useState(initialState);
 

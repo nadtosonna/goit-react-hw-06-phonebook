@@ -10,23 +10,20 @@ export const contactsSlice = createSlice({
   },
   reducers: {
     addContact: {
-      reducer(state, action) {
+      reducer: (state, action) => {
         state.contacts.push(action.payload);
       },
-      prepare({ name, number }) {
+      prepare: (data) => {
         return {
           payload: {
-            name,
-            number,
+            ...data,
             id: nanoid(),
         }
       }
     },
     },
     deleteContact(state, action) {
-      state.contacts.filter(
-        contact => contact.id !== action.payload
-      );
+      state.contacts.filter(({id}) => id !== action.payload);
     },
     filterContacts(state, action) {
       state.filter = action.payload;
@@ -35,9 +32,8 @@ export const contactsSlice = createSlice({
 });
 
 const persistConfig = {
-  key: 'contacts',
+  key: 'root',
   storage,
-  whitelist: ['contacts'],
 };
 
 export const contactsReducer = persistReducer(
