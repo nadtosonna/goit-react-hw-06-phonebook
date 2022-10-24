@@ -35,6 +35,7 @@ export const ContactForm = () => {
                 position: 'center-top',
                 width: '380px',
             });
+            return;
         };
 
         handleAddContact(state);
