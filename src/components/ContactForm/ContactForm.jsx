@@ -20,12 +20,23 @@ export const ContactForm = () => {
     const contacts = useSelector(getContacts);
 
     const handleAddContact = contact => {
-        // const { name, number } = state;
         dispatch(addContact(contact));
     };
 
     const handleSubmit = event => {
         event.preventDefault();
+
+        const existingName = contacts.find(contact =>
+            contact.name.toLowerCase() === state.name.toLowerCase());
+        const existingNumber = contacts.find(contact => contact.number === state.number);
+
+        if (existingName || existingNumber) {
+            Notify.failure('This contact is already existing in the phonebook!', {
+                position: 'center-top',
+                width: '380px',
+            });
+        };
+
         handleAddContact(state);
         setState(initialState);
     };
