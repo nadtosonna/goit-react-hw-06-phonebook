@@ -24,11 +24,3 @@
     color: #E72323;
     scale: 1.2;
 }
-.emptyList {
-    margin-top: 100px;
-    padding: 40px;
-    border: 1px solid #000000;
-    border-radius: 20px;
-    font-weight: 600;
-    background-color: #F4F4F4;
-}
